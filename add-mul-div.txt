@@ -1,0 +1,39 @@
+;schitaet x = x0 + v0t + at2/2
+use16               
+org 100h            
+    
+    ;add v0*t to cx
+    mov al, [v0]
+    mul [t]
+    mov cx, ax
+    
+    ;add x0 to cx
+    mov al, [x0]
+    mov ah, 0
+    add cx, ax
+    
+    ;add a*t^2/2
+    mov al, [t]
+    mul al
+    ;ax - t^2
+    mov bl, [a]
+    mov bh, 0
+    mul bx 
+    mov bx, 2
+    div bx
+    
+    add cx, ax
+    
+    
+    
+    ;bx - rezultat  
+    
+ 
+    mov ax,4C00h    
+    int 21h         
+;-------------------------------------------------------
+x0  db 188
+v0  db 7
+a   db 3
+t   db 25
+x   dw ?
