@@ -1,0 +1,82 @@
+org 100h 
+.model tiny 
+.data 
+N dw 10 
+A dw 0, 9, 1, 8, 2, 7, 3, 6, 4, 5 
+ChFlag db 0 
+msg1 db 10,13,"First array:",10,13,"$" 
+msg2 db 10,13,"Second array:",10,13,"$" 
+Press db 10,13,"Press any key...$" 
+.code 
+
+
+
+;vivod msg1
+    lea dx,msg1 
+    mov ah,09h    
+    int 21h 
+    
+    
+;vivod massiva do sortirovki    
+    mov cx,10      ;count cikla
+    mov bx,0 
+cikl1: 
+    mov ah,02h 
+    mov dx,A[bx] 
+    add dx,30h   ;perevod ctifry v simvol
+    int 21h 
+    add bx,2 
+    loop cikl1   
+    
+    
+    
+    
+;sortirovka    
+Start: 
+    mov ChFlag, 0 
+    mov cx, N 
+    dec cx 
+    mov si, 2 
+M1: mov ax, A[si-2] 
+    mov bx, A[si] 
+    cmp ax, bx 
+    jnb M2 
+    mov A[si], ax 
+    mov A[si-2], bx 
+    inc ChFlag 
+M2: add si, 2 
+    loop M1 
+    cmp ChFlag, 0 
+    jne Start 
+    
+    
+    
+;vivod otsortirovannogo massiva    
+    lea dx,msg2 
+    mov ah,09h 
+    int 21h 
+    
+    mov cx,10 
+    mov bx,0 
+cikl2: 
+    mov ah,02h 
+    mov dx,A[bx] 
+    add dx,30h 
+    int 21h 
+    add bx,2 
+    loop cikl2 
+    
+    
+    
+;ostanovka programmy    
+    lea dx,Press 
+    mov ah,09h 
+    int 21h 
+    
+    mov ah,00h 
+    int 16h 
+    
+    mov ax,4c00h 
+    int 21h 
+
+ret
