@@ -1,0 +1,109 @@
+.model large 
+org 100h 
+.data 
+press: db 13,10,"Press any key... $" 
+msg1 db 10,13,"Input m: $" 
+msg2 db 10,13,"Input n: $"
+msg3 db 10,13,"Input code of symbol: $" 
+mSize db ? 
+nSize db ? 
+codeS db ?
+.code 
+        mov bl, 0 
+        ;---------------------------------------— vvod chisla 
+        lea dx,msg1 
+        mov ah,09h 
+        int 21h 
+    start: 
+        mov ah, 01h 
+        int 21h 
+        cmp al, 0Dh 
+        je end 
+        mov dl, al 
+        mov al, bl 
+        mov cl, 10 
+        mul cl 
+        sub dl, '0' 
+        add al, dl 
+        mov bl, al 
+        jmp start 
+    
+    end: 
+        mov [mSize], bl 
+        lea dx,msg2 
+        mov ah,09h 
+        int 21h 
+    start2: 
+        mov ah, 01h 
+        int 21h 
+        cmp al, 0Dh 
+        je end2 
+        mov dl, al 
+        mov al, bl 
+        mov cl, 10 
+        mul cl 
+        sub dl, '0' 
+        add al, dl 
+        mov bl, al 
+        jmp start2 
+    
+    end2: 
+        mov [nSize], dl
+        
+        
+    lea dx,msg3 
+        mov ah,09h 
+        int 21h 
+    start3: 
+        mov ah, 01h 
+        int 21h 
+        cmp al, 0Dh 
+        je end3 
+        mov dl, al 
+        mov al, bl 
+        mov cl, 10 
+        mul cl 
+        sub dl, '0' 
+        add al, dl 
+        mov bl, al 
+        jmp start3 
+    
+    end3: 
+        mov [codeS], dl 
+        ;----------------------------------------— 
+        mov ah, 02h 
+        mov dl, 0Dh 
+        int 21h 
+        mov dl, 0Ah 
+        int 21h 
+        mov cl, [mSize] 
+    vnesh: 
+    
+    
+        cmp cl, 0 
+        jbe mark 
+        mov bl, [nSize] 
+    vnut: 
+        mov dl, [codeS] 
+        mov ah, 02h 
+        int 21h 
+        dec bl 
+        cmp bx, 0 
+        ja vnut 
+        mov ah, 02h 
+        mov dl, 0Dh 
+        int 21h 
+        mov dl, 0Ah 
+        int 21h 
+        loop vnesh 
+
+
+    mark: 
+        mov ah,09h 
+        mov dx,press 
+        int 21h 
+        mov ah,08h 
+        int 21h 
+        mov ax,4C00h 
+        int 21h 
+ret
