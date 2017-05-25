@@ -2,5 +2,5 @@
 
 - *Emulator* - 8086 processor [download](http://www.emu8086.com/)
 - *Lessons* - web-page for learning asm 8086 [here](http://asmworld.ru/)
-- *Developers* - Artem, Alexander, Alexey
-- *Other web-pages*
+- *Developers* - Artem, Alexander, Alexey-4
+- *Other web-pages-3*
