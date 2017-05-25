@@ -1,0 +1,43 @@
+
+org 100h
+.model flat 
+;this program prints a numeric rectangle like bellow
+;12345
+;23456
+;34567
+;45678
+;56789
+.data
+      step  db '1'
+.code
+ 
+mov al, 5
+mov cx, 5
+mov dl, '1'
+mov ah, 02
+cikl:
+  ;  int 21h  
+    mov bx, cx   
+    mov cx, 5
+     mov dl, [step]
+        
+     
+    cikl_vn:
+       
+        int 21h
+        inc dl
+        loop cikl_vn 
+         mov dl, '2'
+    mov cx, bx         
+    mov dl, 0Ah
+    int 21h    
+    mov dl, 0Dh
+    int 21h    
+    inc [step]
+    loop cikl
+
+
+ret
+
+
+
