@@ -1,11 +1,4 @@
-# This is repository with my labs on asm.net
+# This is repository with labs on asm
 
-- ### loop
-  **_CX_** - counter of cycle(dec CX->comparison CX with 0)
-  ```
-      mov bx, 0   ;initialize bx with 0
-      mov cx, 5   ;number of cycles
-  m1: inc bx      ;label
-      loop m1     ;go to m1, if cx != 0
-  ```
----
+- *Emulator* - 8086 processor [download](http://www.emu8086.com/)
+- *Lessons* - web-page for learning asm 8086 [here](http://asmworld.ru/)
