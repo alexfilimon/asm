@@ -1,4 +1,3 @@
-so now we are ready to commit, yeap?
 # This is repository with labs on asm
 
 - *Emulator* - 8086 processor [download](http://www.emu8086.com/)
