@@ -1,5 +1,6 @@
 ;schitaet x = x0 + v0t + at2/2
-use16               
+use16
+;trololol
 org 100h            
     
     ;add v0*t to cx
